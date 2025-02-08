@@ -10,12 +10,12 @@
   - [7. Categorical Features & One-Hot Encoding](#7-categorical-features--one-hot-encoding)
   - [8. Multi-Class Classification with One-vs-All](#8-multi-class-classification-with-one-vs-all)
   - [9. Quick Recap of Logistic Regression](#9-quick-recap-of-logistic-regression)
-  - [10. Learning the Parameters (\( w \))](#10-learning-the-parameters-w)
+  - [10. Learning the Parameters ($ w $)](#10-learning-the-parameters-w)
   - [11. The Likelihood Function](#11-the-likelihood-function)
   - [12. Why Use Log Likelihood Instead?](#12-why-use-log-likelihood-instead)
   - [13. Optimization: Gradient Ascent](#13-optimization-gradient-ascent)
   - [14. How the Gradient Works](#14-how-the-gradient-works)
-  - [15. Step Size (\( \eta \)) & Learning Rate Tuning](#15-step-size--learning-rate-tuning)
+  - [15. Step Size ($ \eta $) & Learning Rate Tuning](#15-step-size--learning-rate-tuning)
   - [16. Interpretation of Updates](#16-interpretation-of-updates)
   - [17. Final Gradient Ascent Algorithm for Logistic Regression](#17-final-gradient-ascent-algorithm-for-logistic-regression)
   - [Understanding Overfitting in Classification](#understanding-overfitting-in-classification)
@@ -26,7 +26,7 @@
   - [How Regularization Improves Generalization](#how-regularization-improves-generalization)
   - [Implementing Regularization with Gradient Ascent](#implementing-regularization-with-gradient-ascent)
   - [L1 Regularization & Sparsity](#l1-regularization--sparsity)
-  - [How to Choose the Right Regularization Parameter (\( \lambda \))](#how-to-choose-the-right-regularization-parameter-)
+  - [How to Choose the Right Regularization Parameter ($ \lambda $)](#how-to-choose-the-right-regularization-parameter-)
   - [The Reality of Missing Data](#the-reality-of-missing-data)
   - [Common Approaches to Handling Missing Data](#common-approaches-to-handling-missing-data)
   - [Approach 1: Skipping Missing Data (Purification)](#approach-1-skipping-missing-data-purification)
@@ -96,9 +96,9 @@ The decision boundary is a hyperplane (a line in 2D, a plane in 3D, and so on) t
 - "Awesome" has a weight of +1.0, "Awful" has a weight of -1.5.
 - If a sentence contains more "awesomes" than "awfuls," it gets classified as positive.
 - The boundary equation:
-  \[
+  $
   1.0 \times (\# \text{awesomes}) - 1.5 \times (\# \text{awfuls}) = 0
-  \]
+  $
 - Everything below the line is classified as positive.
 - Everything above the line is classified as negative.
 
@@ -119,9 +119,9 @@ This is useful when some classifications are uncertain.
 - Conditional probability: The probability of an event given some condition.
 
 **Example:**
-\[
+$
 P(\text{review is positive} \mid \text{contains "awesome"}) = 0.9
-\]
+$
 This means that, given a review contains "awesome," 90% of such reviews are positive.
 
 ## 5. Logistic Regression & the Sigmoid Function
@@ -129,9 +129,9 @@ This means that, given a review contains "awesome," 90% of such reviews are posi
 How do we convert a score (which ranges from -∞ to +∞) into a probability (0 to 1)? The answer: The Sigmoid Function.
 
 **Formula:**
-\[
+$
 P(y = +1 \mid x) = \frac{1}{1 + e^{-w^T x}}
-\]
+$
 
 **Properties:**
 - If score → +∞, probability → 1 (very confident positive).
@@ -143,10 +143,10 @@ Sigmoid acts as a "squashing function," keeping outputs between 0 and 1.
 ## 6. Learning Logistic Regression from Data
 
 **Process:**
-- Training Data → Feature Extraction → Learn Parameters \( w \) → Predict Sentiment
+- Training Data → Feature Extraction → Learn Parameters $ w $ → Predict Sentiment
 
 **Likelihood Function:**
-- Measures how good a set of parameters \( w \) is for classification.
+- Measures how good a set of parameters $ w $ is for classification.
 - Example: Different decision boundaries will give different likelihood scores.
 
 ## 7. Categorical Features & One-Hot Encoding
@@ -166,9 +166,9 @@ Machine learning models handle numeric data better than categorical data (e.g., 
 **Example:**
 - Sentence: "The sushi was amazing, but service was slow."
 - Convert it into:
-  - \( h_1 = 1 \) (number of “amazing”)
-  - \( h_2 = 1 \) (number of “slow”)
-  - \( h_3 = 1 \) (number of “sushi”)
+  - $ h_1 = 1 $ (number of “amazing”)
+  - $ h_2 = 1 $ (number of “slow”)
+  - $ h_3 = 1 $ (number of “sushi”)
 
 ## 8. Multi-Class Classification with One-vs-All
 
@@ -186,16 +186,16 @@ Choose the class with the highest probability.
 
 ## 9. Quick Recap of Logistic Regression
 
-**Goal:** Learn a classifier that predicts \( P(y \mid x) \), where \( y \) is the output label (positive or negative sentiment), and \( x \) is the input (e.g., a restaurant review).
+**Goal:** Learn a classifier that predicts $ P(y \mid x) $, where $ y $ is the output label (positive or negative sentiment), and $ x $ is the input (e.g., a restaurant review).
 
-- Logistic regression assigns weights (\( w \)) to input features (e.g., words in a review) and computes a score.
+- Logistic regression assigns weights ($ w $) to input features (e.g., words in a review) and computes a score.
 - This score is passed through the sigmoid function to squash it between 0 and 1, giving a probability.
 
-## 10. Learning the Parameters (\( w \))
+## 10. Learning the Parameters ($ w $)
 
-**Objective:** Find the best weights (\( w \)) so that the model accurately classifies inputs.
+**Objective:** Find the best weights ($ w $) so that the model accurately classifies inputs.
 
-- Training data consists of (\( x, y \)) pairs, where \( x \) is the input, and \( y \) is the true label (positive or negative).
+- Training data consists of ($ x, y $) pairs, where $ x $ is the input, and $ y $ is the true label (positive or negative).
 - We want to maximize the probability of correct classifications across all training examples.
 
 ## 11. The Likelihood Function
@@ -203,74 +203,74 @@ Choose the class with the highest probability.
 The likelihood function quantifies how well a model fits the data.
 
 - Higher likelihood = better model fit.
-- Given a dataset of \( N \) examples:
-  - For positive examples, we maximize \( P(y = +1 \mid x, w) \).
-  - For negative examples, we maximize \( P(y = -1 \mid x, w) \).
+- Given a dataset of $ N $ examples:
+  - For positive examples, we maximize $ P(y = +1 \mid x, w) $.
+  - For negative examples, we maximize $ P(y = -1 \mid x, w) $.
 - The overall likelihood function is the product of probabilities across all training examples.
 
 **Example: Computing Likelihood**
 - Suppose we have 4 reviews:
-  - (2 "awesomes", 1 "awful", positive review) → Want high \( P(y = +1 \mid x) \)
-  - (0 "awesomes", 2 "awfuls", negative review) → Want high \( P(y = -1 \mid x) \)
+  - (2 "awesomes", 1 "awful", positive review) → Want high $ P(y = +1 \mid x) $
+  - (0 "awesomes", 2 "awfuls", negative review) → Want high $ P(y = -1 \mid x) $
 
 **Likelihood function:**
-\[
+$
 L(w) = P(y_1 \mid x_1, w) \times P(y_2 \mid x_2, w) \times \ldots \times P(y_N \mid x_N, w)
-\]
-We seek \( w \) that maximizes this likelihood function.
+$
+We seek $ w $ that maximizes this likelihood function.
 
 ## 12. Why Use Log Likelihood Instead?
 
-Since likelihood is a product of many probabilities, it results in very small values. Instead of maximizing \( L(w) \), we maximize its log (log-likelihood function), which turns the product into a sum:
+Since likelihood is a product of many probabilities, it results in very small values. Instead of maximizing $ L(w) $, we maximize its log (log-likelihood function), which turns the product into a sum:
 
-\[
+$
 \log L(w) = \sum_{i=1}^{N} \log P(y_i \mid x_i, w)
-\]
+$
 
 Taking the log simplifies calculations and makes optimization easier.
 
 ## 13. Optimization: Gradient Ascent
 
-Gradient ascent is used to find the optimal weights \( w \) that maximize the log-likelihood function.
+Gradient ascent is used to find the optimal weights $ w $ that maximize the log-likelihood function.
 
 **Key idea:** Start with random weights and iteratively adjust them in the direction of increasing likelihood.
 
 **Gradient Ascent Algorithm:**
-1. Initialize \( w \) randomly.
+1. Initialize $ w $ randomly.
 2. Compute the gradient (how much each weight should change).
 3. Update each weight using:
-   \[
+   $
    w_j = w_j + \eta \cdot \frac{\partial \log L}{\partial w_j}
-   \]
-   - \( \eta \) (step size) controls how big the update is.
+   $
+   - $ \eta $ (step size) controls how big the update is.
 4. Stop when updates become small (converged).
 
 ## 14. How the Gradient Works
 
 The gradient measures the direction and magnitude of change needed for each weight.
 
-**Formula for updating \( w_j \):**
-\[
+**Formula for updating $ w_j $:**
+$
 \frac{\partial \log L}{\partial w_j} = \sum_{i=1}^{N} (y_i - P(y_i = +1 \mid x_i, w)) \cdot x_{ij}
-\]
+$
 
 **Interpretation:**
 - If a positive review is misclassified as negative, increase weights for positive words.
 - If a negative review is misclassified as positive, decrease weights for negative words.
 - If a review is classified correctly, don’t change much.
 
-## 15. Step Size (\( \eta \)) & Learning Rate Tuning
+## 15. Step Size ($ \eta $) & Learning Rate Tuning
 
-Choosing the right step size (\( \eta \)) is crucial.
+Choosing the right step size ($ \eta $) is crucial.
 
-- If \( \eta \) is too small: The model learns slowly, taking too long to converge.
-- If \( \eta \) is too large: The model oscillates or diverges, failing to find the optimal weights.
+- If $ \eta $ is too small: The model learns slowly, taking too long to converge.
+- If $ \eta $ is too large: The model oscillates or diverges, failing to find the optimal weights.
 
 **How to Find the Best Step Size?**
 - Learning curves: Track log-likelihood over iterations.
-  - Too small \( \eta \) → Converges slowly.
-  - Too large \( \eta \) → Wild oscillations.
-  - Optimal \( \eta \) → Smooth increase in log-likelihood, reaching a maximum efficiently.
+  - Too small $ \eta $ → Converges slowly.
+  - Too large $ \eta $ → Wild oscillations.
+  - Optimal $ \eta $ → Smooth increase in log-likelihood, reaching a maximum efficiently.
 
 ## 16. Interpretation of Updates
 
@@ -282,19 +282,19 @@ Choosing the right step size (\( \eta \)) is crucial.
 **Example Calculation:**
 - Suppose a review has 2 “awesomes”, 1 “awful”, and is positive.
 - If the current model predicts 0.5 probability, the update is:
-  \[
+  $
   w_j = w_j + \eta \cdot (1 - 0.5) \cdot 2
-  \]
-  Increase \( w_j \) since the model was uncertain about a positive review.
+  $
+  Increase $ w_j $ since the model was uncertain about a positive review.
 
 ## 17. Final Gradient Ascent Algorithm for Logistic Regression
 
-1. Initialize weights \( w \) randomly.
+1. Initialize weights $ w $ randomly.
 2. Repeat until convergence:
-   - For each weight \( w_j \), update using:
-     \[
+   - For each weight $ w_j $, update using:
+     $
      w_j = w_j + \eta \sum_{i=1}^{N} (y_i - P(y_i = +1 \mid x_i, w)) \cdot x_{ij}
-     \]
+     $
 3. Stop when updates are very small.
 
 **Note:** The algorithm iteratively adjusts weights to maximize the log-likelihood function, converging to the best weights for the model.
@@ -310,7 +310,7 @@ Overfitting happens when a model performs well on training data but fails to gen
 ## Measuring Classification Error
 
 We evaluate classifiers using classification error:
-\[ \text{Error} = \frac{\text{Number of misclassified examples}}{\text{Total number of examples}} \]
+$ \text{Error} = \frac{\text{Number of misclassified examples}}{\text{Total number of examples}} $
 
 Accuracy = 1 - Error. Classifiers should be evaluated on a separate validation set to detect overfitting.
 
@@ -344,7 +344,7 @@ Solution: Regularization penalizes large weights, making the model simpler and m
 
 **Two types of regularization:**
 - **L2 Regularization (Ridge Regression in Regression):** Penalizes large weights using sum of squared coefficients:
-  \[ \lambda \sum w_j^2 \]
+  $ \lambda \sum w_j^2 $
   Helps reduce overfitting while maintaining smooth decision boundaries.
   **Effects:**
   - Keeps coefficients small but nonzero.
@@ -352,7 +352,7 @@ Solution: Regularization penalizes large weights, making the model simpler and m
   - Balances training fit vs. generalization.
 
 - **L1 Regularization (Lasso in Regression):** Penalizes large weights using sum of absolute values:
-  \[ \lambda \sum |w_j| \]
+  $ \lambda \sum |w_j| $
   Encourages sparsity → many weights become exactly 0.
   Useful when working with high-dimensional data (e.g., spam detection with thousands of features).
   **Effects:**
@@ -373,13 +373,13 @@ Solution: Regularization penalizes large weights, making the model simpler and m
 
 Gradient Ascent for Regularized Logistic Regression:
 The update rule adds a penalty term:
-\[ w_j = w_j + \eta \left( \sum_{i=1}^{N} (y_i - P(y_i = +1 \mid x_i, w)) x_{ij} - 2\lambda w_j \right) \]
+$ w_j = w_j + \eta \left( \sum_{i=1}^{N} (y_i - P(y_i = +1 \mid x_i, w)) x_{ij} - 2\lambda w_j \right) $
 
 **Effect:**
 - Reduces large coefficients over time.
 - Helps maintain smooth, generalizable decision boundaries.
 
-**Implementation Change:** Only one small change! Add \(-2\lambda w_j\) to your existing gradient ascent code.
+**Implementation Change:** Only one small change! Add $-2\lambda w_j$ to your existing gradient ascent code.
 
 ## L1 Regularization & Sparsity
 
@@ -516,9 +516,9 @@ The decision boundary is a hyperplane (a line in 2D, a plane in 3D, and so on) t
 - "Awesome" has a weight of +1.0, "Awful" has a weight of -1.5.
 - If a sentence contains more "awesomes" than "awfuls," it gets classified as positive.
 - The boundary equation:
-  \[
+  $
   1.0 \times (\# \text{awesomes}) - 1.5 \times (\# \text{awfuls}) = 0
-  \]
+  $
 - Everything below the line is classified as positive.
 - Everything above the line is classified as negative.
 
@@ -539,9 +539,9 @@ This is useful when some classifications are uncertain.
 - Conditional probability: The probability of an event given some condition.
 
 **Example:**
-\[
+$
 P(\text{review is positive} \mid \text{contains "awesome"}) = 0.9
-\]
+$
 This means that, given a review contains "awesome," 90% of such reviews are positive.
 
 ## 5. Logistic Regression & the Sigmoid Function
@@ -549,9 +549,9 @@ This means that, given a review contains "awesome," 90% of such reviews are posi
 How do we convert a score (which ranges from -∞ to +∞) into a probability (0 to 1)? The answer: The Sigmoid Function.
 
 **Formula:**
-\[
+$
 P(y = +1 \mid x) = \frac{1}{1 + e^{-w^T x}}
-\]
+$
 
 **Properties:**
 - If score → +∞, probability → 1 (very confident positive).
@@ -563,10 +563,10 @@ Sigmoid acts as a "squashing function," keeping outputs between 0 and 1.
 ## 6. Learning Logistic Regression from Data
 
 **Process:**
-- Training Data → Feature Extraction → Learn Parameters \( w \) → Predict Sentiment
+- Training Data → Feature Extraction → Learn Parameters $ w $ → Predict Sentiment
 
 **Likelihood Function:**
-- Measures how good a set of parameters \( w \) is for classification.
+- Measures how good a set of parameters $ w $ is for classification.
 - Example: Different decision boundaries will give different likelihood scores.
 
 ## 7. Categorical Features & One-Hot Encoding
@@ -586,9 +586,9 @@ Machine learning models handle numeric data better than categorical data (e.g., 
 **Example:**
 - Sentence: "The sushi was amazing, but service was slow."
 - Convert it into:
-  - \( h_1 = 1 \) (number of “amazing”)
-  - \( h_2 = 1 \) (number of “slow”)
-  - \( h_3 = 1 \) (number of “sushi”)
+  - $ h_1 = 1 $ (number of “amazing”)
+  - $ h_2 = 1 $ (number of “slow”)
+  - $ h_3 = 1 $ (number of “sushi”)
 
 ## 8. Multi-Class Classification with One-vs-All
 
@@ -606,16 +606,16 @@ Choose the class with the highest probability.
 
 ## 9. Quick Recap of Logistic Regression
 
-**Goal:** Learn a classifier that predicts \( P(y \mid x) \), where \( y \) is the output label (positive or negative sentiment), and \( x \) is the input (e.g., a restaurant review).
+**Goal:** Learn a classifier that predicts $ P(y \mid x) $, where $ y $ is the output label (positive or negative sentiment), and $ x $ is the input (e.g., a restaurant review).
 
-- Logistic regression assigns weights (\( w \)) to input features (e.g., words in a review) and computes a score.
+- Logistic regression assigns weights ($ w $) to input features (e.g., words in a review) and computes a score.
 - This score is passed through the sigmoid function to squash it between 0 and 1, giving a probability.
 
-## 10. Learning the Parameters (\( w \))
+## 10. Learning the Parameters ($ w $)
 
-**Objective:** Find the best weights (\( w \)) so that the model accurately classifies inputs.
+**Objective:** Find the best weights ($ w $) so that the model accurately classifies inputs.
 
-- Training data consists of (\( x, y \)) pairs, where \( x \) is the input, and \( y \) is the true label (positive or negative).
+- Training data consists of ($ x, y $) pairs, where $ x $ is the input, and $ y $ is the true label (positive or negative).
 - We want to maximize the probability of correct classifications across all training examples.
 
 ## 11. The Likelihood Function
@@ -623,74 +623,74 @@ Choose the class with the highest probability.
 The likelihood function quantifies how well a model fits the data.
 
 - Higher likelihood = better model fit.
-- Given a dataset of \( N \) examples:
-  - For positive examples, we maximize \( P(y = +1 \mid x, w) \).
-  - For negative examples, we maximize \( P(y = -1 \mid x, w) \).
+- Given a dataset of $ N $ examples:
+  - For positive examples, we maximize $ P(y = +1 \mid x, w) $.
+  - For negative examples, we maximize $ P(y = -1 \mid x, w) $.
 - The overall likelihood function is the product of probabilities across all training examples.
 
 **Example: Computing Likelihood**
 - Suppose we have 4 reviews:
-  - (2 "awesomes", 1 "awful", positive review) → Want high \( P(y = +1 \mid x) \)
-  - (0 "awesomes", 2 "awfuls", negative review) → Want high \( P(y = -1 \mid x) \)
+  - (2 "awesomes", 1 "awful", positive review) → Want high $ P(y = +1 \mid x) $
+  - (0 "awesomes", 2 "awfuls", negative review) → Want high $ P(y = -1 \mid x) $
 
 **Likelihood function:**
-\[
+$
 L(w) = P(y_1 \mid x_1, w) \times P(y_2 \mid x_2, w) \times \ldots \times P(y_N \mid x_N, w)
-\]
-We seek \( w \) that maximizes this likelihood function.
+$
+We seek $ w $ that maximizes this likelihood function.
 
 ## 12. Why Use Log Likelihood Instead?
 
-Since likelihood is a product of many probabilities, it results in very small values. Instead of maximizing \( L(w) \), we maximize its log (log-likelihood function), which turns the product into a sum:
+Since likelihood is a product of many probabilities, it results in very small values. Instead of maximizing $ L(w) $, we maximize its log (log-likelihood function), which turns the product into a sum:
 
-\[
+$
 \log L(w) = \sum_{i=1}^{N} \log P(y_i \mid x_i, w)
-\]
+$
 
 Taking the log simplifies calculations and makes optimization easier.
 
 ## 13. Optimization: Gradient Ascent
 
-Gradient ascent is used to find the optimal weights \( w \) that maximize the log-likelihood function.
+Gradient ascent is used to find the optimal weights $ w $ that maximize the log-likelihood function.
 
 **Key idea:** Start with random weights and iteratively adjust them in the direction of increasing likelihood.
 
 **Gradient Ascent Algorithm:**
-1. Initialize \( w \) randomly.
+1. Initialize $ w $ randomly.
 2. Compute the gradient (how much each weight should change).
 3. Update each weight using:
-   \[
+   $
    w_j = w_j + \eta \cdot \frac{\partial \log L}{\partial w_j}
-   \]
-   - \( \eta \) (step size) controls how big the update is.
+   $
+   - $ \eta $ (step size) controls how big the update is.
 4. Stop when updates become small (converged).
 
 ## 14. How the Gradient Works
 
 The gradient measures the direction and magnitude of change needed for each weight.
 
-**Formula for updating \( w_j \):**
-\[
+**Formula for updating $ w_j $:**
+$
 \frac{\partial \log L}{\partial w_j} = \sum_{i=1}^{N} (y_i - P(y_i = +1 \mid x_i, w)) \cdot x_{ij}
-\]
+$
 
 **Interpretation:**
 - If a positive review is misclassified as negative, increase weights for positive words.
 - If a negative review is misclassified as positive, decrease weights for negative words.
 - If a review is classified correctly, don’t change much.
 
-## 15. Step Size (\( \eta \)) & Learning Rate Tuning
+## 15. Step Size ($ \eta $) & Learning Rate Tuning
 
-Choosing the right step size (\( \eta \)) is crucial.
+Choosing the right step size ($ \eta $) is crucial.
 
-- If \( \eta \) is too small: The model learns slowly, taking too long to converge.
-- If \( \eta \) is too large: The model oscillates or diverges, failing to find the optimal weights.
+- If $ \eta $ is too small: The model learns slowly, taking too long to converge.
+- If $ \eta $ is too large: The model oscillates or diverges, failing to find the optimal weights.
 
 **How to Find the Best Step Size?**
 - Learning curves: Track log-likelihood over iterations.
-  - Too small \( \eta \) → Converges slowly.
-  - Too large \( \eta \) → Wild oscillations.
-  - Optimal \( \eta \) → Smooth increase in log-likelihood, reaching a maximum efficiently.
+  - Too small $ \eta $ → Converges slowly.
+  - Too large $ \eta $ → Wild oscillations.
+  - Optimal $ \eta $ → Smooth increase in log-likelihood, reaching a maximum efficiently.
 
 ## 16. Interpretation of Updates
 
@@ -702,19 +702,19 @@ Choosing the right step size (\( \eta \)) is crucial.
 **Example Calculation:**
 - Suppose a review has 2 “awesomes”, 1 “awful”, and is positive.
 - If the current model predicts 0.5 probability, the update is:
-  \[
+  $
   w_j = w_j + \eta \cdot (1 - 0.5) \cdot 2
-  \]
-  Increase \( w_j \) since the model was uncertain about a positive review.
+  $
+  Increase $ w_j $ since the model was uncertain about a positive review.
 
 ## 17. Final Gradient Ascent Algorithm for Logistic Regression
 
-1. Initialize weights \( w \) randomly.
+1. Initialize weights $ w $ randomly.
 2. Repeat until convergence:
-   - For each weight \( w_j \), update using:
-     \[
+   - For each weight $ w_j $, update using:
+     $
      w_j = w_j + \eta \sum_{i=1}^{N} (y_i - P(y_i = +1 \mid x_i, w)) \cdot x_{ij}
-     \]
+     $
 3. Stop when updates are very small.
 
 **Note:** The algorithm iteratively adjusts weights to maximize the log-likelihood function, converging to the best weights for the model.
@@ -730,7 +730,7 @@ Overfitting happens when a model performs well on training data but fails to gen
 ## Measuring Classification Error
 
 We evaluate classifiers using classification error:
-\[ \text{Error} = \frac{\text{Number of misclassified examples}}{\text{Total number of examples}} \]
+$ \text{Error} = \frac{\text{Number of misclassified examples}}{\text{Total number of examples}} $
 
 Accuracy = 1 - Error. Classifiers should be evaluated on a separate validation set to detect overfitting.
 
@@ -764,7 +764,7 @@ Solution: Regularization penalizes large weights, making the model simpler and m
 
 **Two types of regularization:**
 - **L2 Regularization (Ridge Regression in Regression):** Penalizes large weights using sum of squared coefficients:
-  \[ \lambda \sum w_j^2 \]
+  $ \lambda \sum w_j^2 $
   Helps reduce overfitting while maintaining smooth decision boundaries.
   **Effects:**
   - Keeps coefficients small but nonzero.
@@ -772,7 +772,7 @@ Solution: Regularization penalizes large weights, making the model simpler and m
   - Balances training fit vs. generalization.
 
 - **L1 Regularization (Lasso in Regression):** Penalizes large weights using sum of absolute values:
-  \[ \lambda \sum |w_j| \]
+  $ \lambda \sum |w_j| $
   Encourages sparsity → many weights become exactly 0.
   Useful when working with high-dimensional data (e.g., spam detection with thousands of features).
   **Effects:**
@@ -793,13 +793,13 @@ Solution: Regularization penalizes large weights, making the model simpler and m
 
 Gradient Ascent for Regularized Logistic Regression:
 The update rule adds a penalty term:
-\[ w_j = w_j + \eta \left( \sum_{i=1}^{N} (y_i - P(y_i = +1 \mid x_i, w)) x_{ij} - 2\lambda w_j \right) \]
+$ w_j = w_j + \eta \left( \sum_{i=1}^{N} (y_i - P(y_i = +1 \mid x_i, w)) x_{ij} - 2\lambda w_j \right) $
 
 **Effect:**
 - Reduces large coefficients over time.
 - Helps maintain smooth, generalizable decision boundaries.
 
-**Implementation Change:** Only one small change! Add \(-2\lambda w_j\) to your existing gradient ascent code.
+**Implementation Change:** Only one small change! Add $-2\lambda w_j$ to your existing gradient ascent code.
 
 ## L1 Regularization & Sparsity
 
@@ -1001,15 +1001,15 @@ AdaBoost (Adaptive Boosting) was one of the first practical boosting algorithms.
 ### AdaBoost Algorithm
 
 1. Initialize equal weights for all training examples.
-2. Train a weak classifier \( f_t(x) \) on the weighted dataset.
+2. Train a weak classifier $ f_t(x) $ on the weighted dataset.
 3. Compute the weighted error:
-   \[
+   $
    \text{error} = \sum (\text{weight of misclassified points})
-   \]
+   $
 4. Compute the classifier’s importance:
-   \[
+   $
    w_t = \frac{1}{2} \ln \left( \frac{1 - \text{error}}{\text{error}} \right)
-   \]
+   $
 5. Update example weights:
    - Increase weight of misclassified points.
    - Decrease weight of correctly classified points.
@@ -1122,17 +1122,17 @@ A classifier identifies 6 sentences as "positive".
 
 #### 📌 Precision Calculation:
 
-\[
+$
 Precision = \frac{True\ Positives}{True\ Positives + False\ Positives} = \frac{4}{6} = 0.67
-\]
+$
 
 **Interpretation:** 67% of displayed sentences are actually positive (the rest are mistakes).
 
 #### 📌 Recall Calculation:
 
-\[
+$
 Recall = \frac{True\ Positives}{True\ Positives + False\ Negatives} = \frac{4}{6} = 0.67
-\]
+$
 
 **Interpretation:** The model found 67% of all possible positive reviews (but missed some).
 
@@ -1322,9 +1322,9 @@ Instead of computing exact gradients, SGD approximates them using small, random 
 - **Too large** → Model oscillates and never converges.
 - **Solution:** Use a **decaying learning rate**:
 
-\[
+$
 \eta_t = \frac{\eta_0}{1+t}
-\]
+$
 
 ✔ Starts with large updates.
 ✔ Gradually reduces update size over time.
