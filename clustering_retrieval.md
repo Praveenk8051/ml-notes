@@ -143,8 +143,8 @@ Instead of scanning all documents (brute-force), we structure the search to make
 ## 3. The Complexity of Nearest Neighbor Search
 
 - **Brute-force search (Linear Scan):**
-  - **1-NN:** \( O(N) \) (N = number of documents).
-  - **k-NN:** \( O(N \log k) \) (if implemented with an efficient priority queue).
+  - **1-NN:** $ O(N) $ (N = number of documents).
+  - **k-NN:** $ O(N \log k) $ (if implemented with an efficient priority queue).
   - **Problem:** Too slow for large datasets (millions/billions of documents).
 
 ## 4. Speeding Up Nearest Neighbor Search
@@ -167,14 +167,14 @@ A binary tree that recursively partitions data along dimensions.
 
 **Complexity:**
 
-- **Best case:** \( O(\log N) \) (highly structured data).
-- **Worst case:** \( O(N) \) (bad partitioning).
+- **Best case:** $ O(\log N) $ (highly structured data).
+- **Worst case:** $ O(N) $ (bad partitioning).
 
 **Issues with KD-Trees:**
 
 - **High-dimensional failure:**
-  - In high dimensions, most points are far apart, leading to exponential complexity in \( d \) (curse of dimensionality).
-  - **Rule of thumb:** Only useful if \( N >> 2^d \).
+  - In high dimensions, most points are far apart, leading to exponential complexity in $ d $ (curse of dimensionality).
+  - **Rule of thumb:** Only useful if $ N >> 2^d $.
 
 **Solution:** Approximate Nearest Neighbor search.
 
@@ -252,8 +252,8 @@ Instead of scanning all documents (brute-force), we structure the search to make
 ## 3. The Complexity of Nearest Neighbor Search
 
 - **Brute-force search (Linear Scan):**
-  - **1-NN:** \( O(N) \) (N = number of documents).
-  - **k-NN:** \( O(N \log k) \) (if implemented with an efficient priority queue).
+  - **1-NN:** $ O(N) $ (N = number of documents).
+  - **k-NN:** $ O(N \log k) $ (if implemented with an efficient priority queue).
   - **Problem:** Too slow for large datasets (millions/billions of documents).
 
 ## 4. Speeding Up Nearest Neighbor Search
@@ -276,14 +276,14 @@ A binary tree that recursively partitions data along dimensions.
 
 **Complexity:**
 
-- **Best case:** \( O(\log N) \) (highly structured data).
-- **Worst case:** \( O(N) \) (bad partitioning).
+- **Best case:** $ O(\log N) $ (highly structured data).
+- **Worst case:** $ O(N) $ (bad partitioning).
 
 **Issues with KD-Trees:**
 
 - **High-dimensional failure:**
-  - In high dimensions, most points are far apart, leading to exponential complexity in \( d \) (curse of dimensionality).
-  - **Rule of thumb:** Only useful if \( N >> 2^d \).
+  - In high dimensions, most points are far apart, leading to exponential complexity in $ d $ (curse of dimensionality).
+  - **Rule of thumb:** Only useful if $ N >> 2^d $.
 
 **Solution:** Approximate Nearest Neighbor search.
 
@@ -452,21 +452,21 @@ This allows GMM to model elliptical and overlapping clusters rather than just sp
 ### Key Equations in GMM
 
 - **Cluster probability (prior probability):**
-  \[
+  $
   P(Z_i = k) = \pi_k
-  \]
-  where \(\pi_k\) represents the weight of cluster \(k\).
+  $
+  where $\pi_k$ represents the weight of cluster $k$.
 
 - **Likelihood of data given a cluster:**
-  \[
+  $
   P(X_i \mid Z_i = k) = N(X_i \mid \mu_k, \Sigma_k)
-  \]
-  where \(\mu_k\) and \(\Sigma_k\) define the cluster distribution.
+  $
+  where $\mu_k$ and $\Sigma_k$ define the cluster distribution.
 
 - **Bayes Rule for Soft Assignments (Responsibilities):**
-  \[
+  $
   P(Z_i = k \mid X_i) = \frac{\pi_k N(X_i \mid \mu_k, \Sigma_k)}{\sum_{j=1}^{K} \pi_j N(X_i \mid \mu_j, \Sigma_j)}
-  \]
+  $
   This equation determines how much responsibility each cluster takes for a data point.
 
 ## Expectation-Maximization (EM) Algorithm
@@ -477,29 +477,29 @@ Since both cluster assignments and parameters (means, covariances, weights) are 
 
 1. Initialize cluster parameters (randomly or via K-means).
 2. **E-Step (Expectation Step):** Compute the responsibilities (soft assignments) using the current parameters.
-3. **M-Step (Maximization Step):** Recompute cluster parameters (\(\pi\), \(\mu\), \(\Sigma\)) using the soft assignments.
+3. **M-Step (Maximization Step):** Recompute cluster parameters ($\pi$, $\mu$, $\Sigma$) using the soft assignments.
 4. Repeat until convergence (i.e., parameters stabilize).
 
 ### Mathematical Form of the EM Steps
 
 - **E-Step:** Compute responsibilities using Bayes' rule:
-  \[
+  $
   r_{ik} = \frac{\pi_k N(X_i \mid \mu_k, \Sigma_k)}{\sum_{j=1}^{K} \pi_j N(X_i \mid \mu_j, \Sigma_j)}
-  \]
+  $
 
 - **M-Step:** Update cluster parameters:
-  - **New cluster weights (\(\pi\)):**
-    \[
+  - **New cluster weights ($\pi$):**
+    $
     \pi_k = \frac{1}{N} \sum_{i=1}^{N} r_{ik}
-    \]
-  - **New cluster means (\(\mu\)):**
-    \[
+    $
+  - **New cluster means ($\mu$):**
+    $
     \mu_k = \frac{\sum_{i=1}^{N} r_{ik} X_i}{\sum_{i=1}^{N} r_{ik}}
-    \]
-  - **New covariance matrices (\(\Sigma\)):**
-    \[
+    $
+  - **New covariance matrices ($\Sigma$):**
+    $
     \Sigma_k = \frac{\sum_{i=1}^{N} r_{ik} (X_i - \mu_k)(X_i - \mu_k)^T}{\sum_{i=1}^{N} r_{ik}}
-    \]
+    $
 
 ### Intuition Behind EM
 
@@ -519,7 +519,7 @@ Since both cluster assignments and parameters (means, covariances, weights) are 
 
 ### K-Means as a Special Case of GMM
 
-If we fix the covariance matrices \(\Sigma_k\) to be equal and drive variances to zero, GMM reduces to K-means. This explains why K-means is a special case of GMM with simplified assumptions.
+If we fix the covariance matrices $\Sigma_k$ to be equal and drive variances to zero, GMM reduces to K-means. This explains why K-means is a special case of GMM with simplified assumptions.
 
 ## Challenges & Practical Considerations
 
@@ -637,9 +637,9 @@ A Markov Chain Monte Carlo (MCMC) method that iteratively refines topic assignme
 2. For each word in each document:
    - Remove its current assignment.
    - Compute probability of assigning it to each topic using:
-     \[
+     $
      P(Z_{iw} = k \mid \text{other assignments}) \propto P(\text{topic } k \mid \text{document } i) \times P(\text{word } w \mid \text{topic } k)
-     \]
+     $
    - Sample a new topic assignment from this distribution.
    - Update topic counts.
 3. Repeat until convergence or computational budget is exhausted.
@@ -647,8 +647,8 @@ A Markov Chain Monte Carlo (MCMC) method that iteratively refines topic assignme
 **Example: Resampling a Word**
 
 Suppose we are reassigning the word "neuron":
-- If the Science topic has many words in this document, \( P(\text{Science} \mid \text{Document}) \) is high.
-- If "neuron" appears frequently in Science articles, \( P(\text{"neuron"} \mid \text{Science}) \) is high.
+- If the Science topic has many words in this document, $ P(\text{Science} \mid \text{Document}) $ is high.
+- If "neuron" appears frequently in Science articles, $ P(\text{"neuron"} \mid \text{Science}) $ is high.
 - The new topic is sampled based on the product of these probabilities.
 
 ## Collapsed Gibbs Sampling
@@ -703,7 +703,7 @@ Instead of sampling the topic-word and document-topic distributions separately, 
 
 #### Scalability Issues
 
-- **Brute-force search:** \( O(N) \) per query, too slow for large datasets.
+- **Brute-force search:** $ O(N) $ per query, too slow for large datasets.
 - **KD-Trees:** Good for low-dimensional data.
 - **Locality-Sensitive Hashing (LSH):** For high-dimensional spaces.
 
