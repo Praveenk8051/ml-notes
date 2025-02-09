@@ -17,6 +17,12 @@ This repository consists of Machine Learning Notes. The aim is to prepare theore
 
 The purpose of these notes is to provide a comprehensive understanding of fundamental machine learning concepts and advanced topics. These notes are intended for students, researchers, and practitioners who want to strengthen their theoretical knowledge in machine learning.
 
+## Formats
+
+The notes are available in two formats:
+- **Markdown:** Suitable for quick reading and reference.
+- **Notebook:** Provides an ore clearer mathematical equation(as the equations are built in latex).
+
 ## How to Use
 
 1. Clone the repository to your local machine.
@@ -26,4 +32,3 @@ The purpose of these notes is to provide a comprehensive understanding of fundam
 ## Contributing
 
 Contributions are welcome! If you have any suggestions or improvements, please feel free to submit a pull request or open an issue.
-
